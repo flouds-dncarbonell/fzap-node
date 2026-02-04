@@ -835,11 +835,33 @@ exports.chatFields = [
                 displayName: 'Button',
                 values: [
                     {
-                        displayName: 'Button ID',
-                        name: 'buttonId',
-                        type: 'string',
-                        default: '',
-                        description: 'Optional button ID (auto-generated if omitted)',
+                        displayName: 'Type',
+                        name: 'type',
+                        type: 'options',
+                        options: [
+                            {
+                                name: 'Quick Reply',
+                                value: 'quickReply',
+                                description: 'Simple reply button',
+                            },
+                            {
+                                name: 'URL',
+                                value: 'url',
+                                description: 'Opens a URL when clicked',
+                            },
+                            {
+                                name: 'Call',
+                                value: 'call',
+                                description: 'Initiates a phone call',
+                            },
+                            {
+                                name: 'Copy',
+                                value: 'copy',
+                                description: 'Copies text/code to clipboard',
+                            },
+                        ],
+                        default: 'quickReply',
+                        description: 'Button type (URL/Call/Copy only work in interactive mode)',
                     },
                     {
                         displayName: 'Button Text',
@@ -850,50 +872,51 @@ exports.chatFields = [
                         description: 'Text displayed on the button',
                     },
                     {
-                        displayName: 'Copy Code',
-                        name: 'copyCode',
+                        displayName: 'Button ID',
+                        name: 'buttonId',
                         type: 'string',
                         default: '',
-                        description: 'Code/text to copy',
-                    },
-                    {
-                        displayName: 'Phone Number',
-                        name: 'phoneNumber',
-                        type: 'string',
-                        default: '',
-                        description: 'Phone number to call',
-                    },
-                    {
-                        displayName: 'Type',
-                        name: 'type',
-                        type: 'options',
-                        options: [
-                            {
-                                name: 'Quick Reply',
-                                value: 'quickReply',
-                            },
-                            {
-                                name: 'URL',
-                                value: 'url',
-                            },
-                            {
-                                name: 'Call',
-                                value: 'call',
-                            },
-                            {
-                                name: 'Copy',
-                                value: 'copy',
-                            },
-                        ],
-                        default: 'quickReply',
-                        description: 'Button type',
+                        description: 'Optional button ID (auto-generated if omitted)',
                     },
                     {
                         displayName: 'URL',
                         name: 'url',
                         type: 'string',
                         default: '',
-                        description: 'URL to open',
+                        required: true,
+                        description: 'URL to open when button is clicked',
+                        displayOptions: {
+                            show: {
+                                type: ['url'],
+                            },
+                        },
+                    },
+                    {
+                        displayName: 'Phone Number',
+                        name: 'phoneNumber',
+                        type: 'string',
+                        default: '',
+                        required: true,
+                        placeholder: '5511999999999',
+                        description: 'Phone number to call (with country code)',
+                        displayOptions: {
+                            show: {
+                                type: ['call'],
+                            },
+                        },
+                    },
+                    {
+                        displayName: 'Copy Code',
+                        name: 'copyCode',
+                        type: 'string',
+                        default: '',
+                        required: true,
+                        description: 'Code or text to copy to clipboard',
+                        displayOptions: {
+                            show: {
+                                type: ['copy'],
+                            },
+                        },
                     },
                 ],
             },
@@ -1121,6 +1144,13 @@ exports.chatFields = [
                 description: 'Whether to validate JID via IsOnWhatsApp before sending',
             },
             {
+                displayName: 'Custom Message ID',
+                name: 'id',
+                type: 'string',
+                default: '',
+                description: 'Custom message ID (auto-generated if omitted)',
+            },
+            {
                 displayName: 'List (JSON)',
                 name: 'listItemsJson',
                 type: 'string',
@@ -1129,6 +1159,13 @@ exports.chatFields = [
                 },
                 default: '',
                 description: 'JSON array of list rows (legacy flat format)',
+            },
+            {
+                displayName: 'Mentioned JIDs',
+                name: 'mentionedJid',
+                type: 'string',
+                default: '',
+                description: 'Comma-separated list of JIDs to mention (e.g., 5511999999999@s.whatsapp.net)',
             },
             {
                 displayName: 'Reply To Message ID',
