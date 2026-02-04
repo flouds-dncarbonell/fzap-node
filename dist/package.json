@@ -1,0 +1,56 @@
+{
+    "name": "n8n-nodes-fzap",
+    "version": "0.1.0",
+    "description": "n8n nodes for FZAP WhatsApp API",
+    "license": "MIT",
+    "homepage": "https://flouds.com.br",
+    "keywords": [
+        "n8n-community-node-package",
+        "n8n",
+        "whatsapp",
+        "fzap"
+    ],
+    "author": {
+        "name": "Daniel Carbonell",
+        "url": "https://flouds.com.br",
+        "email": "contato@flouds.com.br",
+        "phone": "+55 51 99864-1731"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/flouds-dncarbonell/fzap-node.git"
+    },
+    "scripts": {
+        "build": "n8n-node build",
+        "build:watch": "tsc --watch",
+        "dev": "n8n-node dev",
+        "lint": "n8n-node lint",
+        "lint:fix": "n8n-node lint --fix",
+        "release": "n8n-node release",
+        "prepublishOnly": "n8n-node prerelease"
+    },
+    "files": [
+        "dist"
+    ],
+    "n8n": {
+        "n8nNodesApiVersion": 1,
+        "strict": true,
+        "credentials": [
+            "dist/credentials/FZapApi.credentials.js"
+        ],
+        "nodes": [
+            "dist/nodes/FZAP/FZAP.node.js",
+            "dist/nodes/FZAP/FZAPTrigger.node.js"
+        ]
+    },
+    "devDependencies": {
+        "@n8n/node-cli": "*",
+        "eslint": "9.32.0",
+        "prettier": "3.6.2",
+        "release-it": "^19.0.4",
+        "typescript": "5.9.2"
+    },
+    "peerDependencies": {
+        "n8n-workflow": "*"
+    }
+}
